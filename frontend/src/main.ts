@@ -1,17 +1,31 @@
-import { CANVAS_HEIGHT, CANVAS_WIDTH } from "./constants";
+import { CANVAS_HEIGHT, CANVAS_WIDTH } from "./utils/constants";
 import Whiteboard from "./whiteboard";
+import { captureScreenshot } from "./utils/save"
 
+
+
+const saveBtn = document.createElement('button');
+saveBtn.innerText = "Save";
+  saveBtn.addEventListener("click",()=>{
+    captureScreenshot({ rootElementId: 'canvas' })}) ;
+
+document.body.append(saveBtn);
 const canvas= document.createElement('canvas');
+canvas.id = 'canvas';
 
 document.body.append(canvas);
 
 canvas.width = CANVAS_WIDTH;
-canvas.height= CANVAS_HEIGHT;
+canvas.height= 3*CANVAS_HEIGHT/4;
 
 const ctx= canvas.getContext("2d");
 
 
 const whiteboard = new Whiteboard();
+
+
+
+
 
 const animationLoop = ()=>{
   if(ctx){

@@ -1,39 +1,54 @@
-class Whiteboard{
-   
-    
-   path: number[][];
+interface Pos{
+    x: number,
+    y: number
+}
+
+
+class Whiteboard{ 
+   paths: Pos[][];
    
    constructor(){
-       this.
-       path = [];
+       this.paths = [];
 
        let mousedown: boolean = false;
 
        document.onmousedown = ()=>{  
         mousedown = true;
+        this.paths.push([])
        }
        document.onmouseup = ()=>{   
         mousedown = false;
        }   
        document.addEventListener('mousemove', (e)=>{      
         if(mousedown){
-            this.path.push([e.clientX, e.clientY])
+            let x = e.clientX;
+            let y= e.clientY;
+            this.paths[this.paths.length-1].push({x,y});
+            console.log(this.paths[this.paths.length-1]);
+            
         }
        })
    }
 
    draw(ctx: CanvasRenderingContext2D){
-    if(this.path.length > 0){    
-        ctx.beginPath();
-        ctx.moveTo(this.path[0][0], this.path[0][1]);
-        for(let i= 1; i<this.path.length; i++){
-        ctx.lineTo(this.path[i][0], this.path[i][1]);
-        }
-        ctx.stroke();
-        ctx.closePath();
-    }
-   }
+    
+    ctx.beginPath();
+    if(this.paths.length>0){
+    for(const path of this.paths){
 
+    if(path.length > 0){   
+     
+         
+      //i want to draw all the paths;
+      //path = [(x1,y1), (x2,y2)...]
+      ctx.moveTo(path[0].x, path[0].y);
+         for(let i=1; i<path.length; i++){
+              ctx.lineTo(path[i].x, path[i].y);
+     }
+    }
+    ctx.stroke();
+   }}
+   }
    update(){
 
    }
