@@ -7,9 +7,20 @@ import { captureScreenshot } from "./utils/save"
 const saveBtn = document.createElement('button');
 saveBtn.innerText = "Save";
   saveBtn.addEventListener("click",()=>{
-    captureScreenshot({ rootElementId: 'canvas' })}) ;
+    captureScreenshot({ rootElementId:'canvas' })
+  });
+
 
 document.body.append(saveBtn);
+
+
+const fontSize = document.createElement("input") as HTMLInputElement;
+fontSize.id= "FontSize";
+fontSize.type = "number";
+fontSize.placeholder = "Font Size"
+document.body.append(fontSize);
+
+
 const canvas= document.createElement('canvas');
 canvas.id = 'canvas';
 
@@ -30,6 +41,7 @@ const whiteboard = new Whiteboard();
 const animationLoop = ()=>{
   if(ctx){
     ctx.clearRect(0,0,CANVAS_WIDTH, CANVAS_HEIGHT)
+    whiteboard.changeFontSize();
     whiteboard.draw(ctx);
     whiteboard.update();
   } 
