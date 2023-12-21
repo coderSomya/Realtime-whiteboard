@@ -14,11 +14,6 @@ saveBtn.innerText = "Save";
 document.body.append(saveBtn);
 
 
-const fontSize = document.createElement("input") as HTMLInputElement;
-fontSize.id= "FontSize";
-fontSize.type = "number";
-fontSize.placeholder = "Font Size"
-document.body.append(fontSize);
 
 
 const canvas= document.createElement('canvas');

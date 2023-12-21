@@ -17,8 +17,20 @@
     }
   </style>
   <body>
-
+<div>
+  <button>Pencil</button>
+  <button>Rectangle</button>
+  <button onclick="saveImage()">Save</button>
+  <input id="FontSize" placeholder="Font Size" type="number"></input>
+</div>
     <script type="module" src="/src/main.ts"></script>
+    <script type="module" src="/src/utils/save.ts"></script>
  
   </body>
+
+  <script>
+    function saveImage() {
+      captureScreenshot({ rootElementId:'canvas' })
+    }
+  </script>
 </html>
