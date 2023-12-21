@@ -1,4 +1,6 @@
-interface Pos {
+import Pencil from "./Pencil";
+
+export interface Pos {
   x: number;
   y: number;
 }
@@ -10,18 +12,16 @@ enum Tool {
 }
 
 class Whiteboard {
-  paths: Pos[][] = [];
+   activeTool: Tool = Tool.PENCIL;
   mousePos: Pos = { x: 0, y: 0 };
-  overallFontSize: number = 1;
-  rectangles = [];
-  texts = [];
-  activeTool: Tool = Tool.PENCIL;
+  pencil = new Pencil()
+  
 
   constructor() {
     let mousedown: boolean = false;
 
     document.onmousedown = () => {
-      this.paths.push([]);
+      this.pencil.paths.push([]);
       mousedown = true;
     };
     document.onmouseup = () => {
@@ -33,43 +33,28 @@ class Whiteboard {
         const x = e.clientX;
         const y = e.clientY;
         this.mousePos = {x, y};
+        this.pencil.updateMousePos(this.mousePos)
       }
     });
   }
 
   draw(ctx: CanvasRenderingContext2D) {
 
-    ctx.lineWidth = this.overallFontSize;
+   
   
-    if (this.paths.length > 0) {
-  
-      for (const path of this.paths) {
-  
-        if (path.length > 0) {
-  
-          ctx.beginPath();
-          ctx.moveTo(path[0].x, path[0].y);
-  
-          for (let i = 1; i < path.length; i++) {
-            ctx.lineTo(path[i].x, path[i].y);
-          }
-          
-          ctx.stroke();
-        }
-      }
+    if(this.activeTool === Tool.PENCIL){
+        this.pencil.draw(ctx);
     }
   }
   update() {
     if (this.activeTool === Tool.PENCIL) {
-      if (this.paths.length > 0) {
-        this.paths[this.paths.length - 1].push(this.mousePos);
-      }
+      this.pencil.update(); 
     }
   }
 
   changeFontSize() {
     const fontSize = document.getElementById("FontSize") as HTMLInputElement;
-    this.overallFontSize = Number(fontSize.value);
+    this.pencil.overallFontSize = Number(fontSize.value);
   }
 }
 
