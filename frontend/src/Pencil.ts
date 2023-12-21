@@ -34,8 +34,23 @@ class Pencil{
 
     update(){
         if(this.paths.length>0){
+            if(this.paths.length>1){
+                let prevpath= this.paths[this.paths.length-2];
+                let curr = this.mousePos;
+                let prev= prevpath[prevpath.length-1];
+                if(curr === prev) return;
+            }
+            else{
+                if(this.mousePos.x==0 && this.mousePos.y=== 0){
+                    return;
+                }
+            }
+
+
+            // jugaad way to fix path joining issue
+            
             this.paths[this.paths.length - 1].push(this.mousePos)
-        }
+        }   
     }
 } 
 
