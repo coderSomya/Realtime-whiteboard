@@ -1,4 +1,5 @@
 import Pencil from "./Pencil";
+import Rectangle from "./Rectangle";
 
 export interface Pos {
   x: number;
@@ -12,20 +13,29 @@ enum Tool {
 }
 
 class Whiteboard {
-   activeTool: Tool = Tool.PENCIL;
+   activeTool: Tool = Tool.RECTANGLE;
   mousePos: Pos = { x: 0, y: 0 };
-  pencil = new Pencil()
+  pencil = new Pencil();
+  rectangle = new Rectangle();
   
 
   constructor() {
     let mousedown: boolean = false;
 
-    document.onmousedown = () => {
+    document.onmousedown = (e) => {
+        this.mousePos = {x: e.clientX, y: e.clientY};
       this.pencil.paths.push([]);
+      this.rectangle.currentRect={
+        pos :this.mousePos,
+        width: 0,
+        height: 0
+      }
       mousedown = true;
     };
     document.onmouseup = () => {
       mousedown = false;
+      if(this.rectangle.currentRect) this.rectangle.rects.push(this.rectangle.currentRect);
+      this.rectangle.currentRect = undefined;
 
     };
     document.addEventListener("mousemove", (e) => {
@@ -33,7 +43,9 @@ class Whiteboard {
         const x = e.clientX;
         const y = e.clientY;
         this.mousePos = {x, y};
-        this.pencil.updateMousePos(this.mousePos)
+
+        this.pencil.updateMousePos(this.mousePos);
+        this.rectangle.updateMousePos(this.mousePos);
       }
     });
   }
@@ -45,10 +57,16 @@ class Whiteboard {
     if(this.activeTool === Tool.PENCIL){
         this.pencil.draw(ctx);
     }
+    if(this.activeTool === Tool.RECTANGLE){
+        this.rectangle.draw(ctx);
+    }
   }
   update() {
     if (this.activeTool === Tool.PENCIL) {
       this.pencil.update(); 
+    }
+    if(this.activeTool === Tool.RECTANGLE){
+        this.rectangle.update();
     }
   }
 
