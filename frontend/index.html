@@ -15,15 +15,16 @@
       height: 100vh;
       overflow: hidden;
     }
+    .controls{
+      z-index: 10;
+    }
   </style>
   <body>
-<div>
-  <button>Pencil</button>
-  <button>Rectangle</button>
+<div class="controls">
+  <button id="pencil">Pencil</button>
+  <button id="rectangle">Rectangle</button>
   <input id="FontSize" placeholder="Font Size" type="number"></input>
 </div>
-   
- 
   </body>
 
    <script type="module" src="/src/main.ts"></script>

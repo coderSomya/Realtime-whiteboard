@@ -6,23 +6,23 @@ export interface Pos {
   y: number;
 }
 
-enum Tool {
+export enum Tool {
   "PENCIL",
   "RECTANGLE",
   "TEXT",
 }
 
 class Whiteboard {
-   activeTool: Tool = Tool.RECTANGLE;
+   activeTool: Tool = Tool.PENCIL;
   mousePos: Pos = { x: 0, y: 0 };
   pencil = new Pencil();
   rectangle = new Rectangle();
   
 
-  constructor() {
+  constructor(canvas: HTMLCanvasElement) {
     let mousedown: boolean = false;
 
-    document.onmousedown = (e) => {
+    canvas.onmousedown = (e) => {
         this.mousePos = {x: e.clientX, y: e.clientY};
       this.pencil.paths.push([]);
       this.rectangle.currentRect={
@@ -32,13 +32,13 @@ class Whiteboard {
       }
       mousedown = true;
     };
-    document.onmouseup = () => {
+    canvas.onmouseup = () => {
       mousedown = false;
       if(this.rectangle.currentRect) this.rectangle.rects.push(this.rectangle.currentRect);
       this.rectangle.currentRect = undefined;
 
     };
-    document.addEventListener("mousemove", (e) => {
+    canvas.addEventListener("mousemove", (e) => {
       if (mousedown) {
         const x = e.clientX;
         const y = e.clientY;
@@ -54,12 +54,8 @@ class Whiteboard {
 
    
   
-    if(this.activeTool === Tool.PENCIL){
-        this.pencil.draw(ctx);
-    }
-    if(this.activeTool === Tool.RECTANGLE){
-        this.rectangle.draw(ctx);
-    }
+    this.pencil.draw(ctx);
+    this.rectangle.draw(ctx);
   }
   update() {
     if (this.activeTool === Tool.PENCIL) {
