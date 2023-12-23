@@ -25,9 +25,12 @@ class Rectangle{
     draw(ctx: CanvasRenderingContext2D){
         //draw previous rectangles
         ctx.beginPath();
-        if(this.rects){
+        if(this.rects && this.rects.length > 0){
+            console.log(this.rects);
             for(let i= 0; i < this.rects.length; i++){
                 const rect = this.rects[i];
+                console.log(rect);
+                
                 ctx.rect(rect.pos.x, rect.pos.y, rect.width, rect.height);
             }
         }

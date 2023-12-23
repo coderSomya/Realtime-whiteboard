@@ -34,12 +34,13 @@ class Whiteboard extends EventTarget {
 
       setInterval(() => {
         this.dispatchEvent(new Event("state_change"));
-      }, 1000);
+      }, 100);
     };
     canvas.onmouseup = () => {
       mousedown = false;
-      this.rectangle.rects?.push(this.rectangle.currentRect!);
-      this.rectangle.currentRect = undefined;
+      if(this.activeTool===Tool.RECTANGLE){
+        this.rectangle.rects.push(this.rectangle.currentRect!);
+      this.rectangle.currentRect = undefined;}
     };
     canvas.addEventListener("mousemove", (e) => {
       if (mousedown) {
