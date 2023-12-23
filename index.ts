@@ -1,6 +1,11 @@
-import { Socket } from "socket.io";
-const {Server} = require("socket.io");
 import {randomUUID} from 'crypto'
+import {Server} from 'socket.io';
+
+const io = new Server({
+    cors: {
+        origin: "*"
+    }
+});
 
 
 type Room = {
@@ -9,14 +14,13 @@ type Room = {
    roomid: string
 }
 
-const io = new Server(3000, {
 
-});
 
 const rooms: Room[] = [];
 
+//@ts-ignore
 
-io.on('connection', (socket: Socket)=>{
+io.on('connection', (socket)=>{
     
     socket.on('create room', (roomName: string)=>{
         rooms.push({
@@ -28,16 +32,21 @@ io.on('connection', (socket: Socket)=>{
     });
 
     socket.on('get rooms', ()=>{
-        socket.emit('rooms',
-        rooms.map((room: Room)=> ({name: room.roomName, id: room.roomid})
-        ));
+        return rooms.map((room: Room)=> ({name: room.roomName, id: room.roomid}))
     });
 
-    socket.on('join room', (roomid)=>{
+    socket.on('join room', (roomid: string)=>{
        const room = rooms.find((room)=> room.roomid === roomid);
        if(room){
         room.users.push(socket.id)
         socket.join(roomid);
        }
-    })
+    });
+
+    socket.on('leave room', (roomid)=>{
+
+    });
 })
+
+io.listen(3000);
+console.log("server started at port 3000");

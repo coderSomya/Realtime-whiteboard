@@ -1,6 +1,7 @@
 import { CANVAS_HEIGHT, CANVAS_WIDTH } from "./utils/constants";
 import Whiteboard, { Tool } from "./whiteboard";
-import { captureScreenshot } from "./utils/save"
+import { captureScreenshot } from "./utils/save";
+import Socket from 'socket.io-client'
 
 
 const saveBtn = document.createElement('button');
@@ -28,7 +29,20 @@ canvas.height= 3*CANVAS_HEIGHT/4;
 const ctx= canvas.getContext("2d");
 
 
+const io = Socket('http://localhost:3000')
+
+
 const whiteboard = new Whiteboard(canvas);
+
+whiteboard.addEventListener("state_change",(e)=>{
+
+  const state = {
+    pencil: whiteboard.pencil.paths,
+    rectangle: whiteboard.rectangle.rects
+  }
+  console.log(state);
+  io.emit('state_change',state);
+})
 
 
 pencil?.addEventListener("click", ()=>{

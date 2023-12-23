@@ -12,14 +12,16 @@ export enum Tool {
   "TEXT",
 }
 
-class Whiteboard {
+class Whiteboard extends EventTarget{
    activeTool: Tool = Tool.PENCIL;
   mousePos: Pos = { x: 0, y: 0 };
   pencil = new Pencil();
   rectangle = new Rectangle();
   
 
+
   constructor(canvas: HTMLCanvasElement) {
+    super();
     let mousedown: boolean = false;
 
     canvas.onmousedown = (e) => {
