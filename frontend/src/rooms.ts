@@ -12,7 +12,7 @@ let room_name = '';
 type Room = {
     roomName: string,
     users : string[],
-    roomid: string
+    room_id: string
  }
 
 socket.on('rooms', (rooms)=>{
@@ -62,11 +62,11 @@ socket.on('rooms', (rooms)=>{
         );
 
         joinBtn.addEventListener('click', () => {
-            joinRoom(room.roomid);
+            joinRoom(room.room_id);
           });
       
           roomName.innerText = room.roomName;
-          roomId.innerText = room.roomid;
+          roomId.innerText = room.room_id;
           joinBtn.innerText = 'Join';
       
           roomInfo.appendChild(roomName);
@@ -80,6 +80,7 @@ socket.on('rooms', (rooms)=>{
 
 function joinRoom(room_id: string) {
     window.location.replace(`http://localhost:5173?room_id=${room_id}`);
+    
 }
 
 
@@ -91,9 +92,12 @@ roomNameElement?.addEventListener("change", (e)=>{
 
 createBtn?.addEventListener("click", ()=>{
   if(room_name){
-    socket.emit("create room", room_name, (res: any) =>{
+    socket.emit("create_room", room_name, (res: any) =>{
         console.log(res);
     })
   }
+
+   //@ts-ignore
+   room_name_ele!.value = '';
 })
 

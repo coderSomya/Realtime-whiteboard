@@ -33,16 +33,31 @@ const io = Socket('http://localhost:3000')
 
 
 const whiteboard = new Whiteboard(canvas);
+const room_id = location.search.split('=')[1];
+io.emit('join_room', room_id)
+
+io.on('state_change', (state)=>{
+
+  
+  whiteboard.updateState(state);
+})
+ 
 
 whiteboard.addEventListener("state_change",(e)=>{
 
   const state = {
     pencil: whiteboard.pencil.paths,
-    rectangle: whiteboard.rectangle.rects
+    rects: whiteboard.rectangle.rects
   }
-  console.log(state);
-  io.emit('state_change',state);
+  
+  io.emit('state_change',{
+    state,
+    room_id: room_id
+  });
 })
+
+
+
 
 
 pencil?.addEventListener("click", ()=>{
