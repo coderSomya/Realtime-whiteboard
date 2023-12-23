@@ -21,6 +21,14 @@ const rooms: Room[] = [];
 //@ts-ignore
 
 io.on('connection', (socket)=>{
+
+    console.log("new connection", socket.id)
+
+    socket.on('disconnect', ()=>{
+        console.log("disconnected", socket.id)
+    })
+
+    socket.emit('rooms', rooms);
     
     socket.on('create room', (roomName: string)=>{
         rooms.push({
@@ -28,12 +36,9 @@ io.on('connection', (socket)=>{
             users : [],
             roomid: randomUUID()
         });
-        socket.join(roomName);
+        io.emit("rooms", rooms)
     });
 
-    socket.on('get rooms', ()=>{
-        return rooms.map((room: Room)=> ({name: room.roomName, id: room.roomid}))
-    });
 
     socket.on('join room', (roomid: string)=>{
        const room = rooms.find((room)=> room.roomid === roomid);
