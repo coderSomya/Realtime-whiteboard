@@ -1,7 +1,7 @@
 import { Pos } from "./whiteboard";
 
 class Pencil{
-    mousePos: Pos;
+    mousePos?: Pos;
     paths: Pos[][]=[];
     pencilThickness = 2;
     overallFontSize: number = 1;
@@ -40,9 +40,10 @@ class Pencil{
     }
 
     undo(){
-
-      this.paths && this.paths.pop();
-      
+    if( this.paths?.length>0) {
+       this.paths.pop();
+       this.mousePos =undefined;
+    }
     }
 
 
@@ -55,7 +56,7 @@ class Pencil{
                 if(curr === prev) return;
             }
             else{
-                if(this.mousePos.x==0 && this.mousePos.y=== 0){
+                if(this.mousePos?.x==0 && this.mousePos?.y=== 0){
                     return;
                 }
             }
@@ -63,7 +64,7 @@ class Pencil{
 
             // jugaad way to fix path joining issue
             
-            this.paths[this.paths.length - 1].push(this.mousePos)
+            if(this.mousePos) this.paths[this.paths.length - 1].push(this.mousePos)
         }   
     }
 } 

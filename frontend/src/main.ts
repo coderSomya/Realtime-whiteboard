@@ -25,7 +25,12 @@ io.emit('join_room', room_id);
 document.body.append(canvas);
 
 canvas.width = CANVAS_WIDTH;
-canvas.height= 3*CANVAS_HEIGHT/4;
+canvas.height= CANVAS_HEIGHT;
+
+window.addEventListener('resize', ()=>{
+  canvas.width = window.innerWidth;
+  canvas.height= window.innerHeight;
+})
 
 const ctx= canvas.getContext("2d");
 

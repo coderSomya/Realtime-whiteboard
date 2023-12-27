@@ -1,5 +1,6 @@
 import Pencil from "./Pencil";
 import Rectangle from "./Rectangle";
+import { CANVAS_HEIGHT, CANVAS_WIDTH } from "./utils/constants";
 
 export interface Pos {
   x: number;
@@ -80,6 +81,22 @@ class Whiteboard extends EventTarget {
   changeFontSize() {
     const fontSize = document.getElementById("FontSize") as HTMLInputElement;
     this.pencil.overallFontSize = Number(fontSize.value);
+  }
+
+  replay(ctx: CanvasRenderingContext2D){
+    ctx.clearRect(0,0,CANVAS_WIDTH, CANVAS_HEIGHT);
+
+    this.pencil.paths.forEach((path) => 
+    {
+      ctx.beginPath();
+      path.forEach((pos) => {
+
+        setTimeout(()=>{
+          ctx.lineTo(pos.x, pos.y);
+        }, 1000)
+      });
+      ctx.stroke();
+    });
   }
 }
 
