@@ -5,7 +5,7 @@ class Pencil{
     paths: Pos[][]=[];
     pencilThickness = 2;
     overallFontSize: number = 1;
-    color: string =  "blue";
+    color: string =  "black";
     
     constructor(){
       this.mousePos ={

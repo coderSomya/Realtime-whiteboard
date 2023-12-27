@@ -1,0 +1,110 @@
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+  }
+  .controls{
+    z-index: 10;
+  }
+
+  @import url("https://fonts.googleapis.com/css2?family=Varela+Round&display=swap");
+
+nav {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 24px;
+  max-width: 500px;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+}
+
+li{
+    text-decoration: none;
+}
+
+  .nav-box {
+    display: flex;
+    padding: 8px;
+    background-color: #fff;
+    box-shadow: 0px 0px 16px 0px #4444;
+    border-radius: 8px;
+  }
+
+  .nav-container {
+    display: flex;
+    width: 100%;
+    list-style: none;
+    justify-content: space-around;
+  }
+
+  .nav__item {
+    display: flex;
+    position: relative;
+    padding: 2px;
+  }
+    .nav:active {
+      .nav__item-icon {
+        margin-top: -26px;
+        box-shadow: 0px 0px 16px 0px #4444;
+      }
+
+      .nav__item-text {
+        transform: scale(1);
+      }
+    }
+
+    .nav-link {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #2f3046;
+      text-decoration: none;
+    }
+
+    .nav-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6em;
+      background-color: #fff;
+      border-radius: 50%;
+      height: 46px;
+      width: 46px;
+      margin: auto;
+      transition: margin-top 250ms ease-in-out, box-shadow 250ms ease-in-out;
+    }
+
+    .nav-text {
+      position: absolute;
+      bottom: 0;
+      transform: scale(0);
+      transition: transform 250ms ease-in-out;
+    }
+  
+
+
+
+
+    ion-icon {
+        font-size: 32px;
+        color: black;
+    cursor: auto;
+      }
+
+      button{
+        cursor: pointer;
+      }
+
+      .nav__item-icon{
+        text-align: center;
+      }
+
+.input{
+    width: 10px;
+}

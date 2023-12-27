@@ -6,28 +6,75 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Whiteboard</title>
   </head>
-  <style>
-    body{
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      width: 100%;
-      height: 100vh;
-      overflow: hidden;
-    }
-    .controls{
-      z-index: 10;
-    }
-  </style>
+  
+<link rel="stylesheet" href="style.css">
   <body>
-<div class="controls">
+<!-- <div class="controls">
   <button id="pencil">Pencil</button>
   <button id="rectangle">Rectangle</button>
   <input id="FontSize" placeholder="Font Size" type="number">
   <button id="saveBtn">Save</button>
   <input id="color" type="color">
-</div>
+</div> -->
   
+
+
+
+<center> <h1>Realtime Whiteboard</h1></center>
+
+
+
+<nav>
+  <div class="nav-box">
+    <ul class="nav-container">
+      <li class="nav__item active">
+        <a class="nav__item-link">
+          <div class="nav__item-icon">
+            <ion-icon name="pencil"></ion-icon>
+          </div>
+          <button id="pencil">Pencil</button>
+        </a>
+      </li>
+      <li class="nav__item">
+        <a class="nav__item-link">
+          <div class="nav__item-icon">
+            <ion-icon name="tablet-landscape-outline"></ion-icon>
+          </div>
+          <button id="rectangle">Rectangle</button>
+        </a>
+      </li>
+      <li class="nav__item">
+        <a class="nav__item-link">
+          <div class="nav__item-icon">
+            <ion-icon name="download"></ion-icon>
+          </div>
+          <button id="saveBtn">Save</button>
+        </a>
+      </li>
+      <li class="nav__item">
+        <a class="nav__item-link">
+          <div class="nav__item-icon">
+            <ion-icon name="crop-outline"></ion-icon>
+          </div>
+          <input id="FontSize" placeholder="Font Size" type="number">
+        </a>
+      </li>
+      <li class="nav__item">
+        <a class="nav__item-link">
+          <div class="nav__item-icon">
+            <ion-icon name="color-palette-outline"></ion-icon>
+          </div>
+          <input id="color" type="color">
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+
+
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
   </body>
 
    <script type="module" src="/src/main.ts"></script>
