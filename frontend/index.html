@@ -62,9 +62,17 @@
       <li class="nav__item">
         <a class="nav__item-link">
           <div class="nav__item-icon">
+            <ion-icon name="play"></ion-icon>
+          </div>
+          <button id="playBtn">Play</button>
+        </a>
+      </li>
+      <li class="nav__item">
+        <a class="nav__item-link">
+          <div class="nav__item-icon">
             <ion-icon name="crop-outline"></ion-icon>
           </div>
-          <input maxlength="10" id="FontSize" placeholder="Font Size" type="number">
+          <input maxlength="10" id="FontSize"  type="number">
         </a>
       </li>
       <li class="nav__item">
@@ -72,7 +80,7 @@
           <div class="nav__item-icon">
             <ion-icon name="color-palette-outline"></ion-icon>
           </div>
-          <input id="color" type="color">
+          <input placeholder="color" id="color" type="color">
         </a>
       </li>
     </ul>
@@ -86,6 +94,7 @@
   </body>
 
    <script type="module" src="/src/main.ts"></script>
+   <script type="module" src="/src/utils/record.ts"></script>
 
 
 </html>

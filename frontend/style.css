@@ -101,6 +101,8 @@ button {
   text-align: center;
 }
 
-.input {
-  width: 300px;
+input {
+  width: 13px;
+  aspect-ratio: 1;
 }
+

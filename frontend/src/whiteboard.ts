@@ -83,21 +83,7 @@ class Whiteboard extends EventTarget {
     this.pencil.overallFontSize = Number(fontSize.value);
   }
 
-  replay(ctx: CanvasRenderingContext2D){
-    ctx.clearRect(0,0,CANVAS_WIDTH, CANVAS_HEIGHT);
 
-    this.pencil.paths.forEach((path) => 
-    {
-      ctx.beginPath();
-      path.forEach((pos) => {
-
-        setTimeout(()=>{
-          ctx.lineTo(pos.x, pos.y);
-        }, 1000)
-      });
-      ctx.stroke();
-    });
-  }
 }
 
 export default Whiteboard;

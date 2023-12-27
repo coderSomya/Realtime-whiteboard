@@ -9,6 +9,7 @@ const pencil= document.getElementById('pencil');
 const rectangle= document.getElementById('rectangle');
 const saveBtn = document.getElementById('saveBtn');
 const undoBtn = document.getElementById('undoBtn');
+;
 saveBtn!.addEventListener("click",()=>{
   captureScreenshot({ rootElementId:'canvas' })
 });
@@ -78,6 +79,8 @@ undoBtn?.addEventListener("click", ()=>{
   
    whiteboard.pencil.undo();
 })
+
+
 
 
 
