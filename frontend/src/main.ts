@@ -4,22 +4,21 @@ import { captureScreenshot } from "./utils/save";
 import Socket from 'socket.io-client'
 
 
-const saveBtn = document.createElement('button');
-saveBtn.innerText = "Save";
-  saveBtn.addEventListener("click",()=>{
-    captureScreenshot({ rootElementId:'canvas' })
-});
-
-
-document.body.append(saveBtn);
-
 
 const pencil= document.getElementById('pencil');
 const rectangle= document.getElementById('rectangle');
+const saveBtn = document.getElementById('saveBtn');
+saveBtn!.addEventListener("click",()=>{
+  captureScreenshot({ rootElementId:'canvas' })
+});
+const color = document.getElementById('color') as HTMLInputElement;
 
 const canvas= document.createElement('canvas');
 
 canvas.id = 'canvas';
+const io = Socket('http://localhost:3000')
+const room_id = location.search.split('=')[1];
+io.emit('join_room', room_id);
 
 document.body.append(canvas);
 
@@ -29,16 +28,11 @@ canvas.height= 3*CANVAS_HEIGHT/4;
 const ctx= canvas.getContext("2d");
 
 
-const io = Socket('http://localhost:3000')
-
-
 const whiteboard = new Whiteboard(canvas);
-const room_id = location.search.split('=')[1];
-io.emit('join_room', room_id)
 
-io.on('state_change', (state)=>{
 
-  
+
+io.on('state_change', (state)=>{  
   whiteboard.updateState(state);
 })
  
@@ -62,6 +56,10 @@ whiteboard.addEventListener("state_change",(e)=>{
 
 pencil?.addEventListener("click", ()=>{
   whiteboard.activeTool = Tool.PENCIL;
+})
+
+color?.addEventListener("change", ()=>{
+  whiteboard.pencil.color = color.value;
 })
 
 rectangle?.addEventListener("click", ()=>{

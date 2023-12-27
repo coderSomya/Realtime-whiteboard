@@ -6,6 +6,7 @@ export interface Pos {
   y: number;
 }
 
+
 export enum Tool {
   "PENCIL",
   "RECTANGLE",
@@ -38,9 +39,11 @@ class Whiteboard extends EventTarget {
     };
     canvas.onmouseup = () => {
       mousedown = false;
-      if(this.activeTool===Tool.RECTANGLE){
-        this.rectangle.rects.push(this.rectangle.currentRect!);
-      this.rectangle.currentRect = undefined;}
+     
+      if(this.activeTool===Tool.RECTANGLE) {
+      this.rectangle.rects.push(this.rectangle.currentRect!);
+      this.rectangle.currentRect = undefined;
+      }
     };
     canvas.addEventListener("mousemove", (e) => {
       if (mousedown) {

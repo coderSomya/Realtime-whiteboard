@@ -5,6 +5,7 @@ class Pencil{
     paths: Pos[][]=[];
     pencilThickness = 2;
     overallFontSize: number = 1;
+    color: string =  "blue";
     
     constructor(){
       this.mousePos ={
@@ -16,14 +17,21 @@ class Pencil{
         this.mousePos = pos;
     }
 
+    updateColor(color :string){
+      this.color = color;
+    }
+
     draw(ctx: CanvasRenderingContext2D){
       ctx.lineWidth = this.overallFontSize;
     //   ctx.lineWidth = this.pencilThickness;
       for(let i= 0; i<this.paths.length; i++){
         const path= this.paths[i];
+        
+    
         if(path.length>0){
             ctx.moveTo(path[0].x, path[0].y);
             for(let j=1; j<path.length; j++){
+              ctx.strokeStyle=this.color;
                 ctx.lineTo(path[j].x, path[j].y);
             }
         }

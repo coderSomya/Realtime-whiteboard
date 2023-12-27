@@ -26,11 +26,11 @@ const rooms: Room[] = [
 io.on("connection", (socket) => {
   console.log("new connection", socket.id);
 
+  socket.emit("rooms", rooms);
+
   socket.on("disconnect", () => {
     console.log("disconnected", socket.id);
   });
-
-  socket.emit("rooms", rooms);
 
   socket.on("create_room", (roomName: string) => {
     rooms.push({
