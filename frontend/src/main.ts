@@ -8,9 +8,11 @@ import Socket from 'socket.io-client'
 const pencil= document.getElementById('pencil');
 const rectangle= document.getElementById('rectangle');
 const saveBtn = document.getElementById('saveBtn');
+const undoBtn = document.getElementById('undoBtn');
 saveBtn!.addEventListener("click",()=>{
   captureScreenshot({ rootElementId:'canvas' })
 });
+
 const color = document.getElementById('color') as HTMLInputElement;
 
 const canvas= document.createElement('canvas');
@@ -64,6 +66,12 @@ color?.addEventListener("change", ()=>{
 
 rectangle?.addEventListener("click", ()=>{
   whiteboard.activeTool = Tool.RECTANGLE;
+})
+
+undoBtn?.addEventListener("click", ()=>{
+  console.log("clicked undo button");
+  
+   whiteboard.pencil.undo();
 })
 
 

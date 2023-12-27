@@ -39,6 +39,12 @@ class Pencil{
       }
     }
 
+    undo(){
+
+      this.paths && this.paths.pop();
+      
+    }
+
 
     update(){
         if(this.paths.length>0){
