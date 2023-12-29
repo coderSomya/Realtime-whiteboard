@@ -1,3 +1,8 @@
+![screenShare1](https://github.com/coderSomya/Realtime-whiteboard/assets/98840655/f299ab9d-83b0-4cd5-9ef5-b0b5e80b9a19)
+
+_Access the video walkthrough of the app here:_
+https://drive.google.com/drive/folders/1WWkV8ZYDkeaI-zW_WAVjhYAxBcV35R7M
+
 # Realtime-whiteboard
 
 _Features :_
